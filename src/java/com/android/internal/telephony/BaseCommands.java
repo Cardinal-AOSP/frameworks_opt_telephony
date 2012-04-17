@@ -977,4 +977,13 @@ public abstract class BaseCommands implements CommandsInterface {
     @Override
     public void updateAdnRecord(SimPhoneBookAdnRecord adnRecordInfo, Message result) {
     }
+
+    /**
+     * @hide
+     */
+    @Override
+    public int getLteOnGsmMode() {
+        return TelephonyManager.getLteOnGsmModeStatic();
+    }
+
 }
