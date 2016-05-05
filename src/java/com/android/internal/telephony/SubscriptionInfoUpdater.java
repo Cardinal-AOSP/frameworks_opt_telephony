@@ -118,6 +118,7 @@ public class SubscriptionInfoUpdater extends Handler {
     private int mCurrentlyActiveUserId;
     private CarrierServiceBindHelper mCarrierServiceBindHelper;
     private boolean mIsShutdown;
+    private int mCurrentSimCount;
 
     public SubscriptionInfoUpdater(
             Looper looper, Context context, Phone[] phone, CommandsInterface[] ci) {
@@ -699,6 +700,8 @@ public class SubscriptionInfoUpdater extends Handler {
             }
         }
 
+        mCurrentSimCount = insertedSimCount;
+
         if (!mIsShutdown && insertedSimCount == 1) {
             SubscriptionInfo sir = subInfos.get(0);
             int subId = sir.getSubscriptionId();
@@ -829,6 +832,10 @@ public class SubscriptionInfoUpdater extends Handler {
             }
         }
         return -1;
+    }
+
+    protected int getInsertedSimCount() {
+        return mCurrentSimCount;
     }
 
     private boolean isNewSim(String iccId, String[] oldIccId) {
