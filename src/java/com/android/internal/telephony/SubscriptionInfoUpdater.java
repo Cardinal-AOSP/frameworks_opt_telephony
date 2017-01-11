@@ -553,7 +553,7 @@ public class SubscriptionInfoUpdater extends Handler {
         mCarrierServiceBindHelper.updateForPhoneId(slotId, simState);
     }
 
-    protected void handleSimAbsentOrError(int slotId, String simState) {
+    private void handleSimAbsentOrError(int slotId, String simState) {
         if (mIccId[slotId] != null && !mIccId[slotId].equals(ICCID_STRING_FOR_NO_SIM)) {
             logd("SIM" + (slotId + 1) + " hot plug out or error");
         }
