@@ -232,4 +232,11 @@ public class TelephonyComponentFactory {
         Rlog.d(LOG_TAG, "makeSubscriptionInfoUpdater");
         return new SubscriptionInfoUpdater(context, phones, ci);
     }
+
+    public RIL makeRIL(Context context, int preferredNetworkType,
+            int cdmaSubscription, Integer instanceId) {
+        Rlog.d(LOG_TAG, "makeRIL");
+        return new RIL(context, preferredNetworkType, cdmaSubscription, instanceId);
+    }
+
 }
