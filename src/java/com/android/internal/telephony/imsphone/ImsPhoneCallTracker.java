@@ -3283,8 +3283,13 @@ public class ImsPhoneCallTracker extends CallTracker implements ImsPullCall {
 
     private void resetImsCapabilities() {
         log("Resetting Capabilities...");
+        boolean tmpIsVideoCallEnabled = isVideoCallEnabled();
         for (int i = 0; i < mImsFeatureEnabled.length; i++) {
             mImsFeatureEnabled[i] = false;
+        }
+
+        if (tmpIsVideoCallEnabled != isVideoCallEnabled()) {
+            mPhone.notifyForVideoCapabilityChanged(isVideoCallEnabled());
         }
     }
 
