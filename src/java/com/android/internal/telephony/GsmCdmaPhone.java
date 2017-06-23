@@ -1100,7 +1100,7 @@ public class GsmCdmaPhone extends Phone {
                 && (imsFeatureState == ImsFeature.STATE_READY)
                 && isEmergency
                 && alwaysTryImsForEmergencyCarrierConfig
-                && ImsManager.isNonTtyOrTtyOnVolteEnabled(mContext)
+                && ImsManager.getInstance(mContext, mPhoneId).isNonTtyOrTtyOnVolteEnabledForSlot()
                 && (imsPhone.getServiceState().getState() != ServiceState.STATE_POWER_OFF);
 
         String dialPart = PhoneNumberUtils.extractNetworkPortionAlt(PhoneNumberUtils.
@@ -1127,7 +1127,7 @@ public class GsmCdmaPhone extends Phone {
                     + ", imsphone feature state = " + imsFeatureState);
         }
 
-        Phone.checkWfcWifiOnlyModeBeforeDial(mImsPhone, mContext);
+        checkWfcWifiOnlyModeBeforeDial();
 
         if ((imsUseEnabled && (!isUt || useImsForUt)) || useImsForEmergency) {
             try {
@@ -2243,7 +2243,7 @@ public class GsmCdmaPhone extends Phone {
                     mCi.getVoiceRadioTechnology(obtainMessage(EVENT_REQUEST_VOICE_RADIO_TECH_DONE));
                 }
                 // Force update IMS service
-                ImsManager.updateImsServiceConfig(mContext, mPhoneId, true);
+                ImsManager.getInstance(mContext, mPhoneId).updateImsServiceConfigForSlot(true);
 
                 // Update broadcastEmergencyCallStateChanges
                 CarrierConfigManager configMgr = (CarrierConfigManager)
